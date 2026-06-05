@@ -69,7 +69,7 @@ export default function Home() {
   const [cartaAbierta, setCartaAbierta] = useState(false);
   const [petCount, setPetCount] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
-  const [huevos] = useState<Huevo[]>(() => generarHuevos());
+  const [huevos, setHuevos] = useState<Huevo[]>([]);
   const [musicaActiva, setMusicaActiva] = useState(true);
 
   const { desbloquear, isDesbloqueado } = useAchievements();
@@ -87,6 +87,10 @@ export default function Home() {
   useEffect(() => {
     const t = setTimeout(() => setShowIntro(false), 3000);
     return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    setHuevos(generarHuevos());
   }, []);
 
   const resetearAlInicio = () => {
